@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: "Poppins", sans-serif;
+        font-weight: 100;
+        background-color: black;
+      }
+      .top-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 90px;
+        background-color: white;
+        color: black;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0 35px;
+        gap: 4px;
+        z-index: 100;
+      }
+
+      .search-container {
+        display: flex;
+        max-width: 520px;
+        flex-grow: 1;
+        position: relative;
+        height: 56px;
+      }
+
+      .search-bar {
+        width: 100%;
+        border: none;
+        border-radius: 35px;
+        background-color: rgb(243, 243, 243);
+        color: black;
+        font: 14px sans-serif;
+        padding: 0 50px 0 20px;
+        height: 100%;
+        outline: none;
+      }
+
+      .search-bar:hover {
+        padding: 0 50px 0 17px;
+        background-color: white;
+        border: #faebf9 3px solid;
+      }
+
+      .search-button {
+        position: absolute;
+        right: 4px;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgb(234, 76, 137);
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        margin-right: 5px;
+        transition: all 0.3s ease;
+      }
+
+      .search-button:hover {
+        background-color: rgba(234, 76, 137, 0.8);
+      }
+
+      .search-icon {
+        width: 20px;
+        height: 20px;
+        fill: white;
+      }
+
+      .nav {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        margin-left: 20px;
+        margin-right: 0;
+        width: auto;
+        gap: 10px;
+      }
+
+      a {
+        color: black;
+        text-decoration: none;
+        margin: 0 12px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 550;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .auth-buttons {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .sign {
+        margin-right: 15px;
+      }
+
+      .log {
+        width: 90px;
+        height: 48px;
+        background-color: rgb(17, 17, 30);
+        color: white;
+        border: none;
+        border-radius: 23px;
+        font-size: 14px;
+        font-family: "Poppins", sans-serif;
+        font-weight: 545;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+      }
+      .log:hover {
+        background-color: rgb(61, 61, 78);
+      }
+
+      .logo-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin-right: 25px;
+      }
+
+      .logo {
+        width: 100px;
+        cursor: pointer;
+        transition: opacity 0.3s ease;
+      }
+
+      .home-button {
+        position: absolute;
+        left: 50%;
+        top: 100%;
+        background-color: white;
+        color: black;
+        padding: 8px 16px;
+        border: #faebf9 3px solid;
+        border-radius: 20px;
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 600;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        margin-top: 5px;
+      }
+
+      .logo-container:hover .home-button {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(5px);
+      }
+
+      .logo-container:hover .logo {
+        opacity: 0.8;
+      }
+
+      .main_hero {
+        margin-top: 115px;
+        padding: 0 0 40px 0;
+        background: #fafbfc;
+      }
+
+      .sec1 {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 16px;
+      }
+
+      .welcome_banner {
+        font-size: 40px;
+        font-weight: 700;
+        color: #19192b;
+        margin-bottom: 10px;
+      }
+
+      .intro {
+        font-size: 20px;
+        color: #8187a7;
+        max-width: 650px;
+        margin: 0 auto;
+      }
+
+      .sec2 {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 32px;
+        max-width: 1080px;
+        margin: 48px auto 0 auto;
+      }
+
+      .box {
+        background: white;
+        border-radius: 18px;
+        box-shadow: 0 8px 32px rgba(33, 33, 58, 0.08);
+        width: 240px;
+        padding: 28px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .box-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: #19192b;
+        margin-bottom: 8px;
+      }
+
+      .box-content {
+        text-align: center;
+        color: #676787;
+      }
+
+      .footer {
+        background: #111;
+        color: white;
+        text-align: center;
+        padding: 32px 10px 24px 10px;
+        margin-top: 30px;
+        border-radius: 12px 12px 0 0;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="top-bar">
+      <div class="logo-container">
+        <img src="Dribbler.png" alt="Library Logo" class="logo" />
+        <a href="Home.html" class="home-button">Home</a>
+      </div>
+      <div class="search-container">
+        <input
+          class="search-bar"
+          type="search"
+          placeholder="What are you looking for?"
+        />
+        <button class="search-button" type="submit">
+          <svg class="search-icon" viewBox="0 0 24 24">
+            <path
+              d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.39zM11 18a7 7 0 1 1 7-7 7 7 0 0 1-7 7z"
+            />
+          </svg>
+        </button>
+      </div>
+      <div class="nav">
+        <a href="catalog.html">Catalog</a>
+        <a href="lending.html">Lending</a>
+        <a href="ebooks.html">E-books</a>
+        <a href="events.html">Events</a>
+        <a href="about.html">About</a>
+      </div>
+      <div class="auth-buttons">
+        <a class="sign" href="Sign-in page.html">Sign up</a>
+        <button class="log">Log in</button>
+      </div>
+    </nav>
+    <main class="main_hero">
+      <section class="sec1">
+        <h1 class="welcome_banner">Welcome to The Library</h1>
+        <p class="intro">
+          Your gateway to knowledge and discovery. Dive into books, ebooks, and
+          community events—explore, read, and connect!
+        </p>
+      </section>
+
+      <section class="sec2">
+        <div class="box">
+          <span style="font-size: 35px; color: #ea4c89">&#127775;</span>
+          <h2 class="box-title">Summer Challenge</h2>
+          <p class="box-content">
+            Join our Summer Reading Challenge — win prizes for every book you
+            read in July!
+          </p>
+        </div>
+
+        <div class="box">
+          <span style="font-size: 35px; color: #ea4c89">&#128218;</span>
+          <h2 class="box-title">New Arrivals</h2>
+          <p class="box-content">
+            Check out the latest bestsellers and literary classics added this
+            week!
+          </p>
+        </div>
+
+        <div class="box">
+          <span style="font-size: 35px; color: #ea4c89">&#128198;</span>
+          <h2 class="box-title">Events</h2>
+          <p class="box-content">
+            Meet the Author: Jane Doe on July 15th at 6pm. Reserve your spot
+            now!
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div>
+        Contact:
+        <a href="mailto:library@email.com" style="color: #ea4c89"
+          >library@email.com</a
+        >
+        | 123 Main St, City | (123) 456-7890
+      </div>
+      <div style="margin-top: 12px">
+        <span>
+          Feedback?
+          <a href="mailto:library@email.com" style="color: #ea4c89">Email us</a>
+        </span>
+      </div>
+    </footer>
+  </body>
+</html>

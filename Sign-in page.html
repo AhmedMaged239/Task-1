@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .page-wrapper {
+        display: flex;
+        height: 100vh;
+      }
+
+      .auth-section {
+        flex: 5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+        flex-direction: column;
+        text-align: center;
+        position: relative;
+      }
+
+      .logo-container {
+        position: absolute;
+        top: 30px;
+        left: 40px;
+        display: flex;
+        align-items: center;
+      }
+
+      .logo {
+        width: 100px;
+        cursor: pointer;
+        transition: opacity 0.3s ease;
+      }
+
+      .home-button {
+        position: absolute;
+        left: 50%;
+        top: 100%;
+        background-color: white;
+        color: black;
+        padding: 8px 16px;
+        border: #faebf9 3px solid;
+        border-radius: 20px;
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 600;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        margin-top: 5px;
+        box-shadow: 0 4px 12px rgba(234, 76, 137, 0.2);
+      }
+
+      .logo-container:hover .home-button {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(5px);
+      }
+
+      .logo-container:hover .logo {
+        opacity: 0.8;
+      }
+
+      .auth-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .form-logo {
+        margin-bottom: 20px;
+        width: 50px;
+        height: 50px;
+      }
+
+      .page-title {
+        font-size: 24px;
+        margin: 10px 0;
+        font-weight: 700;
+        color: #19192b;
+      }
+
+      .page-description {
+        width: 350px;
+        font-size: 15px;
+        margin-bottom: 25px;
+        color: #676787;
+      }
+
+      .google-auth-button {
+        padding: 18px 74px;
+        background-color: white;
+        color: black;
+        border: 1px solid #ccc;
+        border-radius: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: all 0.2s ease-in-out;
+      }
+
+      .google-auth-button:hover {
+        border-color: rgb(156, 150, 150);
+        background-color: #f8f8fa;
+      }
+
+      .google-icon {
+        width: 16px;
+        height: 16px;
+        margin-right: 8px;
+      }
+
+      .form-divider {
+        margin-top: 25px;
+        margin-bottom: 25px;
+        color: rgb(150, 150, 150);
+        font-size: 14px;
+      }
+
+      .email-field {
+        width: 310px;
+        height: 45px;
+        padding: 0px 16px;
+        margin-bottom: 20px;
+        border-color: rgb(200, 200, 200);
+        border-radius: 10px;
+        border-width: 1px;
+        box-shadow: none;
+        font-size: 14.5px;
+        transition: border-color 0.3s ease;
+      }
+
+      .email-field:focus {
+        outline: none;
+        border-color: #ea4c89;
+      }
+
+      .submit-button {
+        width: 310px;
+        height: 45px;
+        background-color: rgb(17, 17, 30);
+        color: white;
+        border: none;
+        border-radius: 23px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+      }
+
+      .submit-button:hover {
+        background-color: rgb(61, 61, 78);
+      }
+
+      .legal-text {
+        font-size: 12px;
+        color: rgb(150, 150, 150);
+        margin-top: 20px;
+      }
+
+      .legal-text a {
+        color: rgb(150, 150, 150);
+        text-decoration: underline;
+      }
+
+      .legal-text a:hover {
+        color: #ea4c89;
+      }
+
+      .promo-section {
+        flex: 2;
+        background-color: #0d0c22;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .promo-top-half {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 40px;
+        position: relative;
+      }
+
+      .promo-header {
+        position: absolute;
+        top: 30px;
+        right: 40px;
+      }
+
+      .ad-link {
+        color: white;
+        text-decoration: none;
+        font-size: 14px;
+        transition: all 0.2s ease-in-out;
+      }
+
+      .ad-link:hover {
+        color: rgb(156, 150, 150);
+      }
+
+      .promo-content {
+        text-align: left;
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .promo-title {
+        color: white;
+        font-size: 26px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        line-height: 1.3;
+      }
+
+      .cta-link {
+        color: white;
+        text-decoration: none;
+        font-size: 14px;
+        display: inline-flex;
+        align-items: center;
+        transition: all 0.2s ease-in-out;
+        font-weight: 500;
+      }
+
+      .cta-link:hover {
+        color: #ea4c89;
+      }
+
+      .cta-link::after {
+        content: "→";
+        margin-left: 8px;
+        font-size: 16px;
+        transition: transform 0.2s ease;
+      }
+
+      .cta-link:hover::after {
+        transform: translateX(4px);
+      }
+
+      .promo-bottom-half {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      .promo-image-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .promo-image-container img {
+        width: 100%;
+        height: 100%;
+        max-width: 370px;
+        max-height: 100%;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <div class="auth-section">
+        <div class="logo-container">
+          <img src="Dribbler.png" alt="Library Logo" class="logo" />
+          <a href="Home.html" class="home-button">Home</a>
+        </div>
+
+        <form class="auth-form">
+          <img src="./Dribbler_logo.png" class="form-logo" />
+          <h1 class="page-title">Welcome to Dribbler</h1>
+          <p class="page-description">
+            Create your account and discover world-class design talent.
+          </p>
+
+          <button class="google-auth-button" type="button">
+            <img src="./google_logo.png" class="google-icon" />
+            Continue with Google
+          </button>
+
+          <p class="form-divider">or</p>
+
+          <input
+            type="email"
+            placeholder="Enter email address"
+            class="email-field"
+          />
+
+          <button class="submit-button" type="submit">Continue</button>
+
+          <div class="legal-text">
+            By continuing, you agree to our <a href="">Terms</a> and
+            <a href="">Privacy Policy.</a>
+          </div>
+          <div class="legal-text">
+            Already have an account? <a href="">Sign in</a>
+          </div>
+        </form>
+      </div>
+
+      <div class="promo-section">
+        <div class="promo-top-half">
+          <div class="promo-header">
+            <a href="" class="ad-link">Ad</a>
+          </div>
+
+          <div class="promo-content">
+            <h2 class="promo-title">The new Figma to Wix Studio plugin</h2>
+            <a href="" class="cta-link">Learn more</a>
+          </div>
+        </div>
+
+        <div class="promo-bottom-half">
+          <div class="promo-image-container">
+            <img
+              src="https://cdn.dribbble.com/uploads/61393/original/1ec5a9f0608ddd0c5f806f4782779930.jpg?1742324786"
+              alt="Promotional image"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
