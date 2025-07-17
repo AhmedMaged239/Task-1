@@ -85,6 +85,7 @@
       }
 
       .form-logo {
+        margin-top: 30px;
         margin-bottom: 20px;
         width: 50px;
         height: 50px;
@@ -318,6 +319,12 @@
             class="email-field"
           />
 
+          <input
+            type="password"
+            placeholder="Create password"
+            class="email-field"
+          />
+
           <button class="submit-button" type="submit">Continue</button>
 
           <div class="legal-text">
@@ -352,5 +359,46 @@
         </div>
       </div>
     </div>
+    <script>
+      function errorMessage(message, color) {
+        const errorMessage = document.createElement("div");
+        errorMessage.className = "error-message";
+        errorMessage.style.border = `${color} 1px solid`; // Make border thicker
+        errorMessage.style.padding = "10px 20px"; // Add padding inside
+        errorMessage.style.margin = "10px auto"; // Add margin outside
+        errorMessage.style.borderRadius = "5px"; // Round corners
+        errorMessage.style.backgroundColor = "#fff"; // White background
+        errorMessage.style.color = "black"; // Text color matches border
+        errorMessage.style.textAlign = "center"; // Center text
+        errorMessage.style.fontSize = "14px"; // Set font size
+        errorMessage.textContent = message;
+        document.querySelector(".auth-form").appendChild(errorMessage);
+      }
+      document
+        .querySelector(".auth-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const email = document.querySelector(".email-field").value;
+          const password = document.querySelectorAll(".email-field")[1].value;
+
+          const oldError = document.querySelector(".error-message");
+          if (oldError) {
+            oldError.remove();
+          }
+          if (!email || !password) {
+            errorMessage("Please fill in all fields.", "#ea4c89");
+            return;
+          }
+          if (!email.includes("@") || !email.includes(".")) {
+            errorMessage("Please enter a valid email address.", "#ea4c89");
+            return;
+          }
+          errorMessage(
+            "Account created successfully! Redirecting to login page...",
+            "#4cea6e"
+          );
+        });
+    </script>
   </body>
 </html>
