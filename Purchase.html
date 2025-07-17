@@ -284,6 +284,14 @@
         margin-top: 60px;
         border-radius: 12px 12px 0 0;
       }
+      .error {
+        color: red;
+        font-size: 12px;
+        display: none;
+        margin-top: 4px;
+        display: flex;
+        justify-content: start;
+      }
     </style>
   </head>
   <body>
@@ -340,13 +348,15 @@
       <form class="purchase-form">
         <h2>Purchase Book</h2>
         <label for="name">Your Name</label>
-        <input type="text" id="name" name="name" required />
+        <input type="text" id="name" name="name" />
+        <div class="error" id="nameError">Please enter your name.</div>
 
         <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" required />
+        <input type="email" id="email" name="email" />
+        <div class="error" id="emailError">Please enter your email.</div>
 
         <label for="payment">Payment Method</label>
-        <select id="payment" name="payment" required>
+        <select id="payment" name="payment">
           <option value="">Select Payment Method</option>
           <option value="credit">Credit Card</option>
           <option value="paypal">PayPal</option>
@@ -371,5 +381,42 @@
         </span>
       </div>
     </footer>
+    <script>
+      const form = document.querySelector(".purchase-form");
+      const name = document.getElementById("name");
+      const nameError = document.getElementById("nameError");
+      const email = document.getElementById("email");
+      const emailError = document.getElementById("emailError");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        let isValid = true;
+
+        nameError.style.display = "none";
+        emailError.style.display = "none";
+
+        if (name.value.trim() === "") {
+          nameError.style.display = "block";
+          setTimeout(() => {
+            nameError.style.display = "none";
+          }, 3000);
+          isValid = false;
+        }
+
+        if (email.value.trim() === "") {
+          emailError.style.display = "block";
+          setTimeout(() => {
+            emailError.style.display = "none";
+          }, 3000);
+          isValid = false;
+        }
+
+        if (isValid) {
+          alert(`Thank you, ${name.value.trim()}! Your order has been placed.`);
+          form.reset();
+        }
+      });
+    </script>
   </body>
 </html>

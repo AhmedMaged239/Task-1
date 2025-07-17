@@ -76,7 +76,7 @@
         transition: all 0.3s ease;
       }
       .login-container:hover {
-        box-shadow: 0 12px 36px rgba(234, 76, 137, 0.2);
+        box-shadow: 0 12px 36px rgba(234, 76, 137, 0.4);
         transform: translateY(-5px) scale(1.05);
       }
 
@@ -129,10 +129,11 @@
         font-size: 16px;
         cursor: pointer;
         margin-top: 10px;
+        transition: all 0.3s ease;
       }
 
       button:hover {
-        background-color: #d43b77;
+        opacity: 0.9;
       }
     </style>
   </head>
@@ -170,8 +171,14 @@
 
         let isValid = true;
 
+        userError.style.display = "none";
+        passError.style.display = "none";
+
         if (username.value.trim() === "") {
           userError.style.display = "block";
+          setTimeout(() => {
+            userError.style.display = "none";
+          }, 3000);
           isValid = false;
         } else {
           userError.style.display = "none";
@@ -179,6 +186,9 @@
 
         if (password.value.trim() === "") {
           passError.style.display = "block";
+          setTimeout(() => {
+            passError.style.display = "none";
+          }, 3000);
           isValid = false;
         } else {
           passError.style.display = "none";
