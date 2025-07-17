@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+        background: #fafbfc;
+      }
+      .top-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 90px;
+        background-color: white;
+        color: black;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0 35px;
+        gap: 4px;
+        z-index: 100;
+      }
+      .search-container {
+        display: flex;
+        max-width: 520px;
+        flex-grow: 1;
+        position: relative;
+        height: 56px;
+      }
+      .search-bar {
+        width: 100%;
+        border: none;
+        border-radius: 35px;
+        background-color: rgb(243, 243, 243);
+        color: black;
+        font: 14px sans-serif;
+        padding: 0 50px 0 20px;
+        height: 100%;
+        outline: none;
+      }
+      .search-bar:hover {
+        padding: 0 50px 0 17px;
+        background-color: white;
+        border: #faebf9 3px solid;
+      }
+      .search-button {
+        position: absolute;
+        right: 4px;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgb(234, 76, 137);
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        margin-right: 5px;
+        transition: all 0.3s ease;
+      }
+
+      .search-button:hover {
+        background-color: rgba(234, 76, 137, 0.8);
+      }
+
+      .search-icon {
+        width: 20px;
+        height: 20px;
+        fill: white;
+      }
+      .nav {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        margin-left: 20px;
+        margin-right: 0;
+        width: auto;
+        gap: 10px;
+      }
+      a {
+        color: black;
+        text-decoration: none;
+        margin: 0 12px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 550;
+        font-family: "Poppins", sans-serif;
+      }
+      .auth-buttons {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+      .sign {
+        margin-right: 15px;
+      }
+      .log {
+        width: 90px;
+        height: 48px;
+        background-color: rgb(17, 17, 30);
+        color: white;
+        border: none;
+        border-radius: 23px;
+        font-size: 14px;
+        font-family: "Poppins", sans-serif;
+        font-weight: 545;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+      }
+      .log:hover {
+        background-color: rgb(61, 61, 78);
+      }
+      .main-content {
+        max-width: 900px;
+        margin: 150px auto 0 auto;
+        display: flex;
+        gap: 60px;
+        align-items: center;
+      }
+
+      .logo-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin-right: 25px;
+      }
+
+      .logo {
+        width: 100px;
+        cursor: pointer;
+        transition: opacity 0.3s ease;
+      }
+
+      .home-button {
+        position: absolute;
+        left: 50%;
+        top: 100%;
+        background-color: white;
+        color: black;
+        padding: 8px 16px;
+        border: #faebf9 3px solid;
+        border-radius: 20px;
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 600;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        margin-top: 5px;
+      }
+
+      .logo-container:hover .home-button {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(5px);
+      }
+
+      .logo-container:hover .logo {
+        opacity: 0.8;
+      }
+
+      .book-details {
+        background: white;
+        border-radius: 18px;
+        box-shadow: 0 8px 32px rgba(33, 33, 58, 0.1);
+        padding: 28px;
+        flex: 1.5;
+        min-width: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .book-cover {
+        width: 170px;
+        height: 240px;
+        object-fit: cover;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px #ea4c8920;
+        margin-bottom: 16px;
+      }
+      .book-3d-container {
+        perspective: 1200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+
+      .book-3d {
+        width: 170px;
+        height: 240px;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 0.7s cubic-bezier(0.77, 0, 0.175, 1);
+        cursor: pointer;
+      }
+
+      .book-3d:hover {
+        transform: rotateY(-30deg);
+      }
+
+      .book-cover-front,
+      .book-inner {
+        border-radius: 10px;
+        box-shadow: 0 2px 10px #ea4c8920;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 170px;
+        height: 240px;
+        backface-visibility: hidden;
+      }
+
+      .book-cover-front {
+        z-index: 2;
+      }
+
+      .book-inner {
+        background: #f9f6f1;
+        z-index: 1;
+        transform: rotateY(180deg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        color: #c5b08c;
+        font-family: "Poppins", serif;
+        text-align: center;
+        padding: 18px;
+        box-sizing: border-box;
+      }
+      .book-title {
+        font-size: 28px;
+        font-weight: bold;
+        color: #19192b;
+        margin-bottom: 5px;
+        text-align: center;
+      }
+      .book-author {
+        color: #ea4c89;
+        font-size: 16px;
+        margin-bottom: 5px;
+      }
+      .book-genre,
+      .book-status {
+        color: #607080;
+        font-size: 14px;
+        margin-bottom: 0;
+        text-align: center;
+      }
+      .book-desc {
+        margin-top: 18px;
+        color: #555;
+        font-size: 15px;
+        text-align: center;
+      }
+      .purchase-form {
+        background: white;
+        border-radius: 18px;
+        box-shadow: 0 8px 32px rgba(33, 33, 58, 0.1);
+        padding: 30px 28px 32px 28px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+      }
+
+      .purchase-form h2 {
+        margin-top: 0;
+        color: #ea4c89;
+        font-size: 22px;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      .purchase-form label {
+        color: #242455;
+        font-size: 15px;
+        display: block;
+        width: 100%;
+        text-align: left;
+        margin-bottom: 3px;
+        margin-top: 8px;
+      }
+
+      .purchase-form input,
+      .purchase-form select {
+        width: 90%;
+        min-width: 0;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 7px;
+        font-family: inherit;
+        font-size: 15px;
+        background: #f8f8fa;
+        display: block;
+        margin-bottom: 5px;
+        margin-left: auto;
+        margin-right: auto;
+        box-sizing: border-box;
+      }
+
+      .purchase-form button {
+        width: 90%;
+        margin: 14px auto 0 auto;
+        background: #ea4c89;
+        color: white;
+        border: none;
+        padding: 12px 0;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+        display: block;
+      }
+      .footer {
+        background: #111;
+        color: white;
+        text-align: center;
+        padding: 32px 10px 24px 10px;
+        margin-top: 60px;
+        border-radius: 12px 12px 0 0;
+      }
+      .error {
+        color: red;
+        font-size: 12px;
+        display: none;
+        margin-top: 4px;
+        justify-content: start;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="top-bar">
+      <div class="logo-container">
+        <img src="Dribbler.png" alt="Library Logo" class="logo" />
+        <a href="index.html" class="home-button">Home</a>
+      </div>
+      <div class="search-container">
+        <input
+          class="search-bar"
+          type="search"
+          placeholder="What are you looking for?"
+        />
+        <button class="search-button" type="submit">
+          <svg class="search-icon" viewBox="0 0 24 24">
+            <path
+              d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.39zM11 18a7 7 0 1 1 7-7 7 7 0 0 1-7 7z"
+            />
+          </svg>
+        </button>
+      </div>
+      <div class="nav">
+        <a href="Catalog.html">Catalog</a>
+        <a href="lending.html">Lending</a>
+        <a href="ebooks.html">E-books</a>
+        <a href="events.html">Events</a>
+        <a href="about.html">About</a>
+      </div>
+      <div class="auth-buttons">
+        <a class="sign" href="Sign-in page.html">Sign up</a>
+        <button class="log" onclick="window.location.href='Login.html'">
+          Log in
+        </button>
+      </div>
+    </nav>
+    <div class="main-content">
+      <div class="book-details">
+        <div class="book-3d-container">
+          <div class="book-3d">
+            <img
+              class="book-cover-front"
+              src="https://covers.openlibrary.org/b/id/10523338-L.jpg"
+              alt="Book Cover"
+            />
+            <div class="book-inner"></div>
+          </div>
+        </div>
+        <div class="book-title">The Great Gatsby</div>
+        <div class="book-author">by F. Scott Fitzgerald</div>
+        <div class="book-genre">Genre: Classic Fiction</div>
+        <div class="book-status">Availability: In Stock</div>
+        <div class="book-desc">
+          A classic novel of the Roaring Twenties, The Great Gatsby explores
+          themes of decadence, love, and the American Dream. Follow the
+          mysterious Jay Gatsby's lavish parties and unrequited love.
+        </div>
+      </div>
+      <form class="purchase-form">
+        <h2>Purchase Book</h2>
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" />
+        <div class="error" id="nameError">Please enter your name.</div>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" />
+        <div class="error" id="emailError">Please enter your email.</div>
+
+        <label for="payment">Payment Method</label>
+        <select id="payment" name="payment">
+          <option value="">Select Payment Method</option>
+          <option value="credit">Credit Card</option>
+          <option value="paypal">PayPal</option>
+          <option value="cod">Cash on Delivery</option>
+        </select>
+
+        <button type="submit">Buy Now</button>
+      </form>
+    </div>
+    <footer class="footer">
+      <div>
+        Contact:
+        <a href="mailto:library@email.com" style="color: #ea4c89"
+          >library@email.com</a
+        >
+        | 123 Main St, City | (123) 456-7890
+      </div>
+      <div style="margin-top: 12px">
+        <span>
+          Feedback?
+          <a href="mailto:library@email.com" style="color: #ea4c89">Email us</a>
+        </span>
+      </div>
+    </footer>
+    <script>
+      const form = document.querySelector(".purchase-form");
+      const name = document.getElementById("name");
+      const nameError = document.getElementById("nameError");
+      const email = document.getElementById("email");
+      const emailError = document.getElementById("emailError");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        let isValid = true;
+
+        nameError.style.display = "none";
+        emailError.style.display = "none";
+
+        if (name.value.trim() === "") {
+          nameError.style.display = "block";
+          setTimeout(() => {
+            nameError.style.display = "none";
+          }, 3000);
+          isValid = false;
+        }
+
+        if (email.value.trim() === "") {
+          emailError.style.display = "block";
+          setTimeout(() => {
+            emailError.style.display = "none";
+          }, 3000);
+          isValid = false;
+        }
+
+        if (isValid) {
+          alert(`Thank you, ${name.value.trim()}! Your order has been placed.`);
+          form.reset();
+        }
+      });
+    </script>
+  </body>
+</html>

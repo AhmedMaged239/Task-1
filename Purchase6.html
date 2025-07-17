@@ -190,6 +190,57 @@
         box-shadow: 0 2px 10px #ea4c8920;
         margin-bottom: 16px;
       }
+      .book-3d-container {
+        perspective: 1200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+
+      .book-3d {
+        width: 170px;
+        height: 240px;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 0.7s cubic-bezier(0.77, 0, 0.175, 1);
+        cursor: pointer;
+      }
+
+      .book-3d:hover {
+        transform: rotateY(-30deg);
+      }
+
+      .book-cover-front,
+      .book-inner {
+        border-radius: 10px;
+        box-shadow: 0 2px 10px #ea4c8920;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 170px;
+        height: 240px;
+        backface-visibility: hidden;
+      }
+
+      .book-cover-front {
+        z-index: 2;
+      }
+
+      .book-inner {
+        background: #f9f6f1;
+        z-index: 1;
+        transform: rotateY(180deg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        color: #c5b08c;
+        font-family: "Poppins", serif;
+        text-align: center;
+        padding: 18px;
+        box-sizing: border-box;
+      }
       .book-title {
         font-size: 28px;
         font-weight: bold;
@@ -289,7 +340,6 @@
         font-size: 12px;
         display: none;
         margin-top: 4px;
-        display: flex;
         justify-content: start;
       }
     </style>
@@ -330,19 +380,26 @@
     </nav>
     <div class="main-content">
       <div class="book-details">
-        <img
-          class="book-cover"
-          src="https://covers.openlibrary.org/b/id/10523338-L.jpg"
-          alt="Book Cover"
-        />
-        <div class="book-title">The Great Gatsby</div>
-        <div class="book-author">by F. Scott Fitzgerald</div>
-        <div class="book-genre">Genre: Classic Fiction</div>
+        <div class="book-3d-container">
+          <div class="book-3d">
+            <img
+              class="book-cover"
+              src="https://covers.openlibrary.org/b/id/6979861-L.jpg"
+              alt="Book Cover"
+            />
+            <div class="book-inner"></div>
+          </div>
+        </div>
+        <div class="book-title">The Hobbit</div>
+        <div class="book-author">by J.R.R. Tolkien</div>
+        <div class="book-genre">Genre: Fantasy Adventure</div>
         <div class="book-status">Availability: In Stock</div>
         <div class="book-desc">
-          A classic novel of the Roaring Twenties, The Great Gatsby explores
-          themes of decadence, love, and the American Dream. Follow the
-          mysterious Jay Gatsby's lavish parties and unrequited love.
+          "The Hobbit" is a timeless fantasy adventure that follows Bilbo
+          Baggins on an epic journey to reclaim the lost Dwarf Kingdom of
+          Erebor. Alongside Gandalf and a band of dwarves, Bilbo confronts
+          trolls, goblins, and a fearsome dragon, discovering courage and
+          friendship along the way.
         </div>
       </div>
       <form class="purchase-form">
